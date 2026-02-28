@@ -1,0 +1,45 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <title>Tambah Supplier</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="container mt-5">
+      <h2 class="mb-4">Tambah Supplier</h2>
+
+      <form action="/suppliers/save" method="post" th:object="${supplier}">
+        <div class="mb-3">
+          <label class="form-label">Nama Supplier</label>
+          <input
+            type="text"
+            class="form-control"
+            th:field="*{name}"
+            placeholder="Masukkan nama supplier"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label">Alamat</label>
+          <input
+            type="text"
+            class="form-control"
+            th:field="*{address}"
+            placeholder="Masukkan alamat"
+          />
+        </div>
+
+        <button type="submit" class="btn btn-primary">Save</button>
+        <a href="/suppliers" class="btn btn-secondary">Back</a>
+      </form>
+    </div>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>

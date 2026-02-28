@@ -7,21 +7,31 @@ import jakarta.persistence.*;
 @Entity
 @Table(name = "products")
 public class Product {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     private String name;
     private String brand;
-    private String category;
+
+    @ManyToOne
+    @JoinColumn(name = "category_id")
+    private Category categoryObj;
+
+    @ManyToOne
+    @JoinColumn(name = "supplier_id")
+    private Supplier supplierObj;
+
     private double price;
 
     @Column(columnDefinition = "TEXT")
     private String description;
+
     private Date createdAt;
     private String imageFileName;
 
-    // id
+    // ===== ID =====
     public int getId() {
         return id;
     }
@@ -30,7 +40,7 @@ public class Product {
         this.id = id;
     }
 
-    // name
+    // ===== NAME =====
     public String getName() {
         return name;
     }
@@ -39,7 +49,7 @@ public class Product {
         this.name = name;
     }
 
-    // brand
+    // ===== BRAND =====
     public String getBrand() {
         return brand;
     }
@@ -48,16 +58,25 @@ public class Product {
         this.brand = brand;
     }
 
-    // category
-    public String getCategory() {
-        return category;
+    // ===== CATEGORY =====
+    public Category getCategoryObj() {
+        return categoryObj;
     }
 
-    public void setCategory(String category) {
-        this.category = category;
+    public void setCategoryObj(Category categoryObj) {
+        this.categoryObj = categoryObj;
     }
 
-    // price
+    // ===== SUPPLIER =====
+    public Supplier getSupplierObj() {
+        return supplierObj;
+    }
+
+    public void setSupplierObj(Supplier supplierObj) {
+        this.supplierObj = supplierObj;
+    }
+
+    // ===== PRICE =====
     public double getPrice() {
         return price;
     }
@@ -66,7 +85,7 @@ public class Product {
         this.price = price;
     }
 
-    // description
+    // ===== DESCRIPTION =====
     public String getDescription() {
         return description;
     }
@@ -75,7 +94,7 @@ public class Product {
         this.description = description;
     }
 
-    // created at
+    // ===== CREATED AT =====
     public Date getCreatedAt() {
         return createdAt;
     }
@@ -84,7 +103,7 @@ public class Product {
         this.createdAt = createdAt;
     }
 
-    // image file name
+    // ===== IMAGE =====
     public String getImageFileName() {
         return imageFileName;
     }
@@ -92,5 +111,4 @@ public class Product {
     public void setImageFileName(String imageFileName) {
         this.imageFileName = imageFileName;
     }
-
 }

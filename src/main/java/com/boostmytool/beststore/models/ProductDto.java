@@ -1,18 +1,21 @@
 package com.boostmytool.beststore.models;
 
 import org.springframework.web.multipart.MultipartFile;
-
 import jakarta.validation.constraints.*;
 
 public class ProductDto {
+
     @NotEmpty(message = "The name is required")
     private String name;
 
     @NotEmpty(message = "The brand is required")
     private String brand;
 
-    @NotEmpty(message = "The category is required")
-    private String category;
+    @NotNull(message = "Category is required")
+    private Category categoryObj;
+
+    @NotNull(message = "Supplier is required")
+    private Supplier supplierObj;
 
     @Min(0)
     private double price;
@@ -42,12 +45,21 @@ public class ProductDto {
     }
 
     // category
-    public String getCategory() {
-        return category;
+    public Category getCategoryObj() {
+        return categoryObj;
     }
 
-    public void setCategory(String category) {
-        this.category = category;
+    public void setCategoryObj(Category categoryObj) {
+        this.categoryObj = categoryObj;
+    }
+
+    // supplier
+    public Supplier getSupplierObj() {
+        return supplierObj;
+    }
+
+    public void setSupplierObj(Supplier supplierObj) {
+        this.supplierObj = supplierObj;
     }
 
     // price
@@ -68,7 +80,7 @@ public class ProductDto {
         this.description = description;
     }
 
-    // imageFile
+    // image
     public MultipartFile getImageFile() {
         return imageFile;
     }
