@@ -17,30 +17,32 @@
         <div class="col-md-8 mx-auto rounded border p-4 m-4">
           <h2 class="text-center mb-5">Edit Product</h2>
           <form
+            th:action="@{/products/edit}"
             method="post"
-            action="/products/edit"
-            th:object="${productDto}"
             enctype="multipart/form-data"
+            th:object="${productDto}"
           >
-            <input type="hidden" th:value="${product.id}" name="id" />
+            <!-- ID hidden -->
+            <input type="hidden" name="id" th:value="${product.id}" />
 
             <div class="mb-3">
-              <label class="form-label">Name</label>
-              <input type="text" class="form-control" th:field="*{name}" />
+              <label>Name</label>
+              <input class="form-control" th:field="*{name}" />
             </div>
 
             <div class="mb-3">
-              <label class="form-label">Brand</label>
-              <input type="text" class="form-control" th:field="*{brand}" />
+              <label>Brand</label>
+              <input class="form-control" th:field="*{brand}" />
             </div>
 
             <!-- CATEGORY -->
             <div class="mb-3">
-              <label class="form-label">Category</label>
+              <label>Category</label>
               <select class="form-select" th:field="*{categoryObj}">
+                <option value="">-- Select Category --</option>
                 <option
                   th:each="c : ${categories}"
-                  th:value="${c}"
+                  th:value="${c.id}"
                   th:text="${c.name}"
                 ></option>
               </select>
@@ -48,30 +50,37 @@
 
             <!-- SUPPLIER -->
             <div class="mb-3">
-              <label class="form-label">Supplier</label>
+              <label>Supplier</label>
               <select class="form-select" th:field="*{supplierObj}">
+                <option value="">-- Select Supplier --</option>
                 <option
                   th:each="s : ${suppliers}"
-                  th:value="${s}"
+                  th:value="${s.id}"
                   th:text="${s.name}"
                 ></option>
               </select>
             </div>
 
             <div class="mb-3">
-              <label class="form-label">Price</label>
+              <label>Price</label>
               <input type="number" class="form-control" th:field="*{price}" />
             </div>
 
             <div class="mb-3">
-              <label class="form-label">Description</label>
+              <label>Description</label>
               <textarea
                 class="form-control"
                 th:field="*{description}"
               ></textarea>
             </div>
 
-            <button class="btn btn-success">Update</button>
+            <!-- IMAGE OPTIONAL -->
+            <div class="mb-3">
+              <label>Change Image (Optional)</label>
+              <input type="file" class="form-control" th:field="*{imageFile}" />
+            </div>
+
+            <button class="btn btn-primary">Update</button>
           </form>
         </div>
       </div>

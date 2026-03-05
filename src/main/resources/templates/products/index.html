@@ -23,6 +23,7 @@
             <th>Name</th>
             <th>Brand</th>
             <th>Category</th>
+            <th>Supplier</th>
             <th>Price</th>
             <th>Image</th>
             <th>Created At</th>
@@ -34,7 +35,12 @@
             <td th:text="${product.id}"></td>
             <td th:text="${product.name}"></td>
             <td th:text="${product.brand}"></td>
-            <td th:text="${product.categoryObj}"></td>
+            <td
+              th:text="${product.categoryObj != null ? product.categoryObj.name : '-'}"
+            ></td>
+            <td
+              th:text="${product.supplierObj != null ? product.supplierObj.name : '-'}"
+            ></td>
             <td th:text="@{${product.price} + '$'}"></td>
             <td>
               <img

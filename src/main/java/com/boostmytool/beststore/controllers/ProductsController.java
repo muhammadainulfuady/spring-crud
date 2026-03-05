@@ -1,7 +1,10 @@
 package com.boostmytool.beststore.controllers;
 
 import java.io.InputStream;
-import java.nio.file.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -11,7 +14,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.boostmytool.beststore.models.Product;
@@ -136,10 +143,10 @@ public class ProductsController {
 
     @PostMapping("/edit")
     public String updateProduct(
-            Model model,
             @RequestParam int id,
-            @Valid @ModelAttribute ProductDto productDto,
-            BindingResult result) {
+            @ModelAttribute ProductDto productDto,
+            BindingResult result,
+            Model model) {
 
         Optional<Product> optionalProduct = repo.findById(id);
         if (optionalProduct.isEmpty()) {
@@ -157,9 +164,8 @@ public class ProductsController {
 
         String uploadDir = "public/images/";
 
-        if (!productDto.getImageFile().isEmpty()) {
+        if (productDto.getImageFile() != null && !productDto.getImageFile().isEmpty()) {
 
-            // delete old image
             try {
                 Files.deleteIfExists(Paths.get(uploadDir + product.getImageFileName()));
             } catch (Exception ex) {

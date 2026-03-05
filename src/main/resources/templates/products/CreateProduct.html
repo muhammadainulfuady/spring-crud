@@ -17,10 +17,10 @@
         <div class="col-md-8 mx-auto rounded border p-4 m-4">
           <h2 class="text-center mb-5">New Product</h2>
           <form
+            th:action="@{/products/create}"
             method="post"
-            action="/products/create"
-            th:object="${productDto}"
             enctype="multipart/form-data"
+            th:object="${productDto}"
           >
             <div class="mb-3">
               <label class="form-label">Name</label>
@@ -39,7 +39,7 @@
                 <option value="">-- Select Category --</option>
                 <option
                   th:each="c : ${categories}"
-                  th:value="${c}"
+                  th:value="${c.id}"
                   th:text="${c.name}"
                 ></option>
               </select>
@@ -52,7 +52,7 @@
                 <option value="">-- Select Supplier --</option>
                 <option
                   th:each="s : ${suppliers}"
-                  th:value="${s}"
+                  th:value="${s.id}"
                   th:text="${s.name}"
                 ></option>
               </select>
